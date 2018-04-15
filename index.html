@@ -72,6 +72,10 @@
             margin-right: 30%;
         }
 
+        .changecolor{
+            color: #9D5C63;
+        }
+
         @font-face {
             font-family: 'Canela Web';
             src: url('https://pudding.cool/assets/fonts/canela/Canela-Light-Web.woff2') format('woff2'),
@@ -170,7 +174,9 @@
             <!-- Title and Prose -->
             <div class= 'bubbleprose'>
                 <div class= 'bubbleintro'>
-                    <h2 class='bubbleprose_hed tk-canela'><strong>Popularity of Breeds in Each Borough</strong></h2> 
+                    <h2 class='bubbleprose_hed tk-canela'><strong>Popularity of
+                            <span class="changecolor"> Breeds </span>
+                            in Each Borough</strong></h2> 
                     <p>Count of unique dog breeds in Brooklyn, Manhattan, Queens, Staten Island, and the Bronx.
                         The larger the circle, the more instances of that breed in its respective borough.
                         Hover over the circles to see the breed and their count!
@@ -356,7 +362,9 @@
         <div class='agedist-container'>
             <!-- Title and Prose -->
             <div class= 'ageprose'>
-                <h2 class='ageprose_hed tk-canela'><strong>Age Distribution of Breeds in Each Borough</strong></h2>  
+                <h2 class='ageprose_hed tk-canela'>
+                    <strong><span class="changecolor">Age</span> 
+                        Distribution of Dogs in Each Borough</strong></h2>  
                 <p>Distribution of the ages of dogs (as of 2015) in NYC from 1 year old to 18 years old!</p>  
             </div>
         </div>
