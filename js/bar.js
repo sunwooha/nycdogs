@@ -1,6 +1,6 @@
 var margin = {top: 45, right: 100, bottom: 20, left: 20},
-    width = 450 - margin.left - margin.right,
-    height = 90 - margin.top - margin.bottom;
+    width = 500 - margin.left - margin.right,
+    height = 120 - margin.top - margin.bottom;
 
 var color = d3.scale.threshold()
     .range(['#fffafa','#f5e7e8','#ead5d6','#e0c4c5','#d5b1b4','#caa0a3','#bf8f92','#b47e82','#a96d72','#9d5c63'])
@@ -25,7 +25,7 @@ var tip = d3.tip()
   .attr('class', 'd3-tip')
   .offset([-10, 0])
   .html(function(d) {
-    return "<strong>" + "</strong><span style='color:#fff'>" + d.n + " dogs are " + d.AgeAsOf2015 + "! </span>";
+    return "<strong>" + "</strong><span style='color:#000000'>" + d.n + " dogs are " + d.AgeAsOf2015 + "! </span>";
   })
 
 d3.csv("data/age_distribution.csv", type, function(data) {
@@ -43,7 +43,7 @@ d3.csv("data/age_distribution.csv", type, function(data) {
     .enter()
     .append("svg:svg")
     .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+    .attr("height", height + margin.top + margin.bottom + 50)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -54,11 +54,12 @@ d3.csv("data/age_distribution.csv", type, function(data) {
 
   svg.append("g")
     .append("text")
-    .attr("x", width + 10)
-    .attr("y", height/3)
+    .attr("x", width/3)
+    .attr("y", height - 98)
     .attr("dy", ".71em")
     .attr("text-anchor", "start")
     .attr("font-size", "1.1em")
+    .attr("font-weight", "bold")
     .text(function(d) { return d.key});
 
   svg.selectAll(".bar")
