@@ -43,7 +43,7 @@ d3.csv("data/age_distribution.csv", type, function(data) {
     .enter()
     .append("svg:svg")
     .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom + 50)
+    .attr("height", height + margin.top + margin.bottom+40)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -55,12 +55,19 @@ d3.csv("data/age_distribution.csv", type, function(data) {
   svg.append("g")
     .append("text")
     .attr("x", width/3)
-    .attr("y", height - 98)
+    .attr("y", height - 110)
     .attr("dy", ".71em")
     .attr("text-anchor", "start")
     .attr("font-size", "1.1em")
     .attr("font-weight", "bold")
-    .text(function(d) { return d.key});
+    .text(function(d) {
+        if(d.key == "Bronx"){
+            return "The Bronx";
+        }
+        else{
+            return d.key;
+        }
+    });
 
   svg.selectAll(".bar")
       .data(function(d) {return d.values;})

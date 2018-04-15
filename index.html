@@ -21,22 +21,16 @@
     <meta property='og:description' content='An analysis of different attributes of dogs living in the boroughs of NYC.' />
     <meta property='og:type' content='article' />
     <meta property='og:locale' content='en_US' />
-    
-    <meta property='og:image' content='https://pudding.cool/year/month/name/' />
-    <meta property='og:image:type' content='image/jpeg' />
-    <meta property='og:image:width' content='1200' />
-    <meta property='og:image:height' content='600' />
-    
-    <meta name='twitter:card' content='summary_large_image' />
-    <meta name='twitter:site' content='https://pudding.cool' />
-    <meta name='twitter:creator' content='@hajennifers' />
-    <meta name='twitter:title' content='Exploring Dogs and NYC Boroughs in Three Charts' />
-    <meta name='twitter:description' content='An analysis of different attributes of dogs living in the boroughs of NYC.' />
 
     <link rel='stylesheet' href='css/critical.css' />
     <link rel='stylesheet' href='css/bundle.css' />
 
     <style type="text/css">
+        #namevis {
+            font-family: 'Canela Web';
+            font-size: 15px;
+        }
+
         body {
             background-color: #F9F5ED;
         }
@@ -125,6 +119,19 @@
             margin: -1px 0 0 0;
             top: 100%;
             left: 0;
+        }
+        ul {
+            list-style: none;
+            font-weight: bold;
+            color: #9D5C63;
+            font-size: 25px;
+        }
+
+        li {
+            margin:  0.2em 0.0em;
+            padding: 0.5em 1.0em;
+            font-weight: normal;
+            color: #000000;
         }
 
         @font-face {
@@ -218,7 +225,6 @@
             <p class='intro__dek tk-atlas'>An analysis of different attributes of dogs living in the boroughs of NYC.</p>
             <p class='intro__byline tk-atlas'>By <a href='https://github.com/sunwooha' target='_blank'><strong>Jennifer Ha</strong></a></p>
         </div>
-
         <!-- Bubble Chart -->
         <div class="bubble-container">
             <!-- Title and Prose -->
@@ -239,18 +245,33 @@
             </div>               
         </div>
         <!-- Age Bar Chart -->
-        <div class='agedist-container'>
+        <div class='age-container'>
             <!-- Title and Prose -->
             <div class= 'ageprose'>
-                <div class='ageprose'>
+                <div class='ageproseintro'>
                     <h2 class='ageprose_hed tk-canela'><strong><span class="changecolor">Age</span> Distribution of Dogs in Each Borough</strong></h2>  
-                    <p>Distribution of the ages of dogs (as of 2015) in NYC from 1 year old to 18 years old!</p>
+                    <p>Distribution of the ages of dogs (as of 2015) in NYC from 1 year old to 18 years old! Hover over the bars for more info!</p>
                 </div> 
                 <br></br>
                 <div id="barvis"></div>
                  <script src="js/bar.js"></script>
                  <br></br>
                  <p>Text explaining a little bit about the bar charts</p>
+            </div>
+        </div>
+        <!-- Top 10 Name List -->
+        <div class='name-container'>
+            <div class='nameprose'>
+                <div class='nameproseintro'>
+                    <h2 class='nameprose_hed tk-canela'><strong>Top 10 Trending <span class="changecolor">Names</span> for Dogs in Each Borough</strong></h2>
+                    <p>The title speaks for itself.</p>
+                </div>
+                <div class="namediv" align = 'center'>
+                    <div id='namevis'>
+                        <script src='js/list.js'></script>
+                    </div>
+                </div>
+                <br></br>
             </div>
         </div>
     </main>        

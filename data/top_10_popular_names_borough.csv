@@ -1,52 +1,51 @@
-"","Borough","AnimalName","n"
-"1","Bronx","BELLA",128
-"2","Bronx","BUDDY",58
-"3","Bronx","COCO",94
-"4","Bronx","LOLA",81
-"5","Bronx","LUCKY",85
-"6","Bronx","MAX",122
-"7","Bronx","MIA",57
-"8","Bronx","OREO",65
-"9","Bronx","PRINCE",57
-"10","Bronx","PRINCESS",113
-"11","Bronx","ROCKY",117
-"12","Brooklyn","BELLA",232
-"13","Brooklyn","CHARLIE",168
-"14","Brooklyn","COCO",140
-"15","Brooklyn","DAISY",125
-"16","Brooklyn","LOLA",143
-"17","Brooklyn","LUCKY",161
-"18","Brooklyn","LUCY",129
-"19","Brooklyn","MAX",219
-"20","Brooklyn","PRINCESS",131
-"21","Brooklyn","ROCKY",167
-"22","Manhattan","BAILEY",153
-"23","Manhattan","BELLA",239
-"24","Manhattan","CHARLIE",285
-"25","Manhattan","COCO",217
-"26","Manhattan","DAISY",164
-"27","Manhattan","LOLA",261
-"28","Manhattan","LUCY",285
-"29","Manhattan","MAX",248
-"30","Manhattan","OLIVER",171
-"31","Manhattan","TEDDY",152
-"32","Queens","BELLA",230
-"33","Queens","BUDDY",125
-"34","Queens","CHARLIE",139
-"35","Queens","COCO",190
-"36","Queens","DAISY",117
-"37","Queens","LOLA",109
-"38","Queens","LUCKY",162
-"39","Queens","MAX",239
-"40","Queens","PRINCESS",122
-"41","Queens","ROCKY",205
-"42","Staten Island","BAILEY",72
-"43","Staten Island","BELLA",142
-"44","Staten Island","BUDDY",102
-"45","Staten Island","CHARLIE",65
-"46","Staten Island","COCO",76
-"47","Staten Island","LOLA",72
-"48","Staten Island","LUCKY",60
-"49","Staten Island","MAX",105
-"50","Staten Island","MOLLY",71
-"51","Staten Island","ROCKY",106
+BoroughName,AnimalName,n
+Bronx,BELLA,128
+Bronx,BUDDY,58
+Bronx,COCO,94
+Bronx,LOLA,81
+Bronx,LUCKY,85
+Bronx,MAX,122
+Bronx,OREO,65
+Bronx,PRINCE,57
+Bronx,PRINCESS,113
+Bronx,ROCKY,117
+Brooklyn,BELLA,232
+Brooklyn,CHARLIE,168
+Brooklyn,COCO,140
+Brooklyn,DAISY,125
+Brooklyn,LOLA,143
+Brooklyn,LUCKY,161
+Brooklyn,LUCY,129
+Brooklyn,MAX,219
+Brooklyn,PRINCESS,131
+Brooklyn,ROCKY,167
+Manhattan,BAILEY,153
+Manhattan,BELLA,239
+Manhattan,CHARLIE,285
+Manhattan,COCO,217
+Manhattan,DAISY,164
+Manhattan,LOLA,261
+Manhattan,LUCY,285
+Manhattan,MAX,248
+Manhattan,OLIVER,171
+Manhattan,TEDDY,152
+Queens,BELLA,230
+Queens,BUDDY,125
+Queens,CHARLIE,139
+Queens,COCO,190
+Queens,DAISY,117
+Queens,LOLA,109
+Queens,LUCKY,162
+Queens,MAX,239
+Queens,PRINCESS,122
+Queens,ROCKY,205
+Staten Island,BAILEY,72
+Staten Island,BELLA,142
+Staten Island,BUDDY,102
+Staten Island,CHARLIE,65
+Staten Island,COCO,76
+Staten Island,LOLA,72
+Staten Island,LUCKY,60
+Staten Island,MAX,105
+Staten Island,MOLLY,71
+Staten Island,ROCKY,106
