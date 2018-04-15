@@ -68,8 +68,8 @@
         }
 
         div.bubbleintro{
-            margin-left: 30%;
-            margin-right: 30%;
+            margin-left: 20%;
+            margin-right: 20%;
         }
 
         .changecolor{
@@ -288,7 +288,7 @@
                                 text: data[node_counter].text,
                                 size: data[node_counter].size, 
                                 cluster: i,
-                                radius: Math.log2(data[node_counter].size)*(maxRadius/(4.5)),
+                                radius: Math.log2(data[node_counter].size)*(maxRadius/(5)),
                                 x: Math.cos(i / m * 2 * Math.PI) * 100 + width / 2 + Math.random(),
                                 y: Math.sin(i / m * 2 * Math.PI) * 100 + height / 2 + Math.random()
                             };
