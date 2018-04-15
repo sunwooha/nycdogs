@@ -43,7 +43,7 @@ d3.csv("data/age_distribution.csv", type, function(data) {
     .enter()
     .append("svg:svg")
     .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom+40)
+    .attr("height", height + margin.top + margin.bottom + 50)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -55,7 +55,7 @@ d3.csv("data/age_distribution.csv", type, function(data) {
   svg.append("g")
     .append("text")
     .attr("x", width/3)
-    .attr("y", height - 110)
+    .attr("y", height - 95)
     .attr("dy", ".71em")
     .attr("text-anchor", "start")
     .attr("font-size", "1.1em")
