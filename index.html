@@ -26,9 +26,8 @@
     <link rel='stylesheet' href='css/bundle.css' />
 
     <style type="text/css">
-        #namevis {
-            font-family: 'Canela Web';
-            font-size: 15px;
+        #boroughlist{
+            color: #8A716A;
         }
 
         body {
@@ -73,7 +72,7 @@
         }
 
         .changecolor{
-            color: #9D5C63;
+            color: #8A716A;
         }
 
         .axis path,
@@ -95,7 +94,7 @@
             font-size: 12px;
             line-height: 1;
             padding: 9px;
-            background: #E8E8E8;
+            background: #1e1e1e;
             opacity: 0.6;
             color: #efefef;
             border-radius: 2px;
@@ -105,10 +104,10 @@
         .d3-tip:after {
             box-sizing: border-box;
             display: inline;
-            font-size: 10px;
+            font-size: 12px;
             width: 100%;
             line-height: 1;
-            color: #E8E8E8;
+            color: #1e1e1e;
             content: "\25BC";
             position: absolute;
             text-align: center;
@@ -120,10 +119,10 @@
             top: 100%;
             left: 0;
         }
+
         ul {
             list-style: none;
             font-weight: bold;
-            color: #9D5C63;
             font-size: 25px;
         }
 
@@ -132,6 +131,34 @@
             padding: 0.5em 1.0em;
             font-weight: normal;
             color: #000000;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fffafa;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -60px;
+            
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
         }
 
         @font-face {
@@ -257,21 +284,86 @@
                  <script src="js/bar.js"></script>
                  <br></br>
                  <p>Text explaining a little bit about the bar charts</p>
+                 <br></br>
             </div>
         </div>
         <!-- Top 10 Name List -->
         <div class='name-container'>
             <div class='nameprose'>
                 <div class='nameproseintro'>
-                    <h2 class='nameprose_hed tk-canela'><strong>Top 10 Trending <span class="changecolor">Names</span> for Dogs in Each Borough</strong></h2>
+                    <h2 class='nameprose_hed tk-canela'><strong>Top 10 <span class="changecolor">Names</span> for Dogs in Each Borough</strong></h2>
                     <p>The title speaks for itself.</p>
                 </div>
-                <div class="namediv" align = 'center'>
-                    <div id='namevis'>
-                        <script src='js/list.js'></script>
+                <div class="namediv">
+                    <div id='namelist'>
+                        <ul id = 'boroughlist'>The Bronx
+                            <li class="tooltip">BELLA<span class="tooltiptext">128 dogs</span></li>
+                            <li class="tooltip">MAX<span class="tooltiptext">122 dogs</span></li>
+                            <li class="tooltip">ROCKY<span class="tooltiptext">117 dogs</span></li>
+                            <li class="tooltip">PRINCESS<span class="tooltiptext">113 dogs</span></li>
+                            <li class="tooltip">COCO<span class="tooltiptext">94 dogs</span></li>
+                            <li class="tooltip">LUCKY<span class="tooltiptext">85 dogs</span></li>
+                            <li class="tooltip">LOLA<span class="tooltiptext">81 dogs</span></li>
+                            <li class="tooltip">OREO<span class="tooltiptext">65 dogs</span></li>
+                            <li class="tooltip">BUDDY<span class="tooltiptext">58 dogs</span></li>
+                            <li class="tooltip">PRINCE<span class="tooltiptext">58 dogs</span></li>
+                        </ul>
+                        <br></br>
+                        <ul id='boroughlist'>Brooklyn
+                            <li class="tooltip">BELLA<span class="tooltiptext">232 dogs</span></li>
+                            <li class="tooltip">MAX<span class="tooltiptext">219 dogs</span></li>
+                            <li class="tooltip">CHARLIE<span class="tooltiptext">168 dogs</span></li>
+                            <li class="tooltip">ROCKY<span class="tooltiptext">167 dogs</span></li>
+                            <li class="tooltip">LUCKY<span class="tooltiptext">161 dogs</span></li>
+                            <li class="tooltip">LOLA<span class="tooltiptext">143 dogs</span></li>
+                            <li class="tooltip">COCO<span class="tooltiptext">140 dogs</span></li>
+                            <li class="tooltip">PRINCESS<span class="tooltiptext">131 dogs</span></li>
+                            <li class="tooltip">LUCY<span class="tooltiptext">129 dogs</span></li>
+                            <li class="tooltip">DAISY<span class="tooltiptext">125 dogs</span></li>
+                        </ul>
+                        <br></br>
+                        <ul id='boroughlist'>Manhattan
+                            <li class="tooltip">CHARLIE<span class="tooltiptext">285 dogs</span></li>
+                            <li class="tooltip">LUCY<span class="tooltiptext">285 dogs</span></li>
+                            <li class="tooltip">LOLA<span class="tooltiptext">261 dogs</span></li>
+                            <li class="tooltip">MAX<span class="tooltiptext">248 dogs</span></li>
+                            <li class="tooltip">BELLA<span class="tooltiptext">239 dogs</span></li>
+                            <li class="tooltip">COCO<span class="tooltiptext">217 dogs</span></li>
+                            <li class="tooltip">OLIVER<span class="tooltiptext">171 dogs</span></li>
+                            <li class="tooltip">DAISY<span class="tooltiptext">164 dogs</span></li>
+                            <li class="tooltip">BAILEY<span class="tooltiptext">153 dogs</span></li>
+                            <li class="tooltip">TEDDY<span class="tooltiptext">152 dogs</span></li>
+                        </ul>
+                        <br></br>
+                        <ul id='boroughlist'>Queens
+                            <li class="tooltip">MAX<span class="tooltiptext">239 dogs</span></li>
+                            <li class="tooltip">BELLA<span class="tooltiptext">230 dogs</span></li>
+                            <li class="tooltip">ROCKY<span class="tooltiptext">205 dogs</span></li>
+                            <li class="tooltip">COCO<span class="tooltiptext">190 dogs</span></li>
+                            <li class="tooltip">LUCKY<span class="tooltiptext">162 dogs</span></li>
+                            <li class="tooltip">CHARLIE<span class="tooltiptext">139 dogs</span></li>
+                            <li class="tooltip">BUDDY<span class="tooltiptext">125 dogs</span></li>
+                            <li class="tooltip">PRINCESS<span class="tooltiptext">122 dogs</span></li>
+                            <li class="tooltip">DAISY<span class="tooltiptext">117 dogs</span></li>
+                            <li class="tooltip">LOLA<span class="tooltiptext">109 dogs</span></li>
+                        </ul>
+                        <br></br>
+                        <ul id='boroughlist'>Staten Island
+                            <li class="tooltip">BELLA<span class="tooltiptext">142 dogs</span></li>
+                            <li class="tooltip">ROCKY<span class="tooltiptext">106 dogs</span></li>
+                            <li class="tooltip">MAX<span class="tooltiptext">105 dogs</span></li>
+                            <li class="tooltip">BUDDY<span class="tooltiptext">102 dogs</span></li>
+                            <li class="tooltip">COCO<span class="tooltiptext">76 dogs</span></li>
+                            <li class="tooltip">BAILEY<span class="tooltiptext">72 dogs</span></li>
+                            <li class="tooltip">LOLA<span class="tooltiptext">72 dogs</span></li>
+                            <li class="tooltip">MOLLY<span class="tooltiptext">71 dogs</span></li>
+                            <li class="tooltip">CHARLIE<span class="tooltiptext">65 dogs</span></li>
+                            <li class="tooltip">LUCKY<span class="tooltiptext">60 dogs</span></li>
+                        </ul>
                     </div>
                 </div>
                 <br></br>
+                <p>Text explaining a little bit about the names.</p>
             </div>
         </div>
     </main>        

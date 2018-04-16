@@ -9,7 +9,7 @@ d3.csv("data/top_10_popular_names_borough.csv", type, function(data) {
         });
     });
 
-    console.log(boroughs2[0].values);
+    console.log(boroughs2);
 
     var list = d3.select('#namevis').selectAll('ul')
         .data(boroughs2)

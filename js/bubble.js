@@ -1,86 +1,86 @@
 var width1 = 1000,
-        height1 = 800,
-        padding = 1.5, // separation between same-color nodes
-        clusterPadding = 6, // separation between different-color nodes
-        maxRadius = 9;
+    height1 = 800,
+    padding = 1.5, // separation between same-color nodes
+    clusterPadding = 6, // separation between different-color nodes
+    maxRadius = 9;
 
-    var colorScale = d3.scale.ordinal()
-        .range(["#584B53", "#9D5C63", "#D6E3F8", "#94958B", "#E4BB97"]);
+var colorScale = d3.scale.ordinal()
+    .range(["#584B53", "#9D5C63", "#D6E3F8", "#94958B", "#E4BB97"]);
 
-    d3.text("data/breeds_borough_count.csv", function(error, text) {
-        if (error) throw error;
-        var colNames = "group,text,size\n" + text;
-        var data = d3.csv.parse(colNames);
+d3.text("data/breeds_borough_count.csv", function(error, text) {
+    if (error) throw error;
+    var colNames = "group,text,size\n" + text;
+    var data = d3.csv.parse(colNames);
 
-    data.forEach(function(d) {
-        d.size = +d.size;
-    });
+data.forEach(function(d) {
+    d.size = +d.size;
+});
 
-    //unique cluster/group id's
-    var cs = [];
-    data.forEach(function(d){
-        if(!cs.includes(d.group)) {
-            cs.push(d.group);
-        }
-    });
-
-    var n = data.length, // total number of nodes
-        m = cs.length; // number of distinct clusters
-
-    //create clusters and nodes
-    var clusters = new Array(m);
-    var nodes = [];
-    for (var i = 0; i<n; i++){
-        nodes.push(create_nodes(data,i));
+//unique cluster/group id's
+var cs = [];
+data.forEach(function(d){
+    if(!cs.includes(d.group)) {
+        cs.push(d.group);
     }
+});
 
-    var force = d3.layout.force()
-        .nodes(nodes)
-        .size([width1, height1])
-        .gravity(.02)
-        .charge(0)
-        .on("tick", tick)
-        .start();
+var n = data.length, // total number of nodes
+    m = cs.length; // number of distinct clusters
 
-    var svg = d3.select("#bubblevis").append("svg")
-        .attr("width", width1)
-        .attr("height", height1)
+//create clusters and nodes
+var clusters = new Array(m);
+var nodes = [];
+for (var i = 0; i<n; i++){
+    nodes.push(create_nodes(data,i));
+}
 
-    var node = svg.selectAll("circle")
-        .data(nodes)
-        .enter().append("g")
-        .call(force.drag);
+var force = d3.layout.force()
+    .nodes(nodes)
+    .size([width1, height1])
+    .gravity(.02)
+    .charge(0)
+    .on("tick", tick)
+    .start();
 
-    node.append("circle")
-        .style("fill", function (d) {
-            return colorScale(d.cluster);
-        })
-        .attr("r", function(d){return d.radius})
-        .on("mouseover", function(d){
-            d3.select(this).style("opacity", 0.75);
-            updateDogInfo(d)})
-        .on("mouseout", function(d){
-            d3.select(this).style("opacity", 1);
-            updateDogInfo(d)});
+var svg = d3.select("#bubblevis").append("svg")
+    .attr("width", width1)
+    .attr("height", height1)
 
-    svg.append("g")
-        .attr("class", "legendOrdinal")
-        .attr("transform", "translate(5,10)");
+var node = svg.selectAll("circle")
+    .data(nodes)
+    .enter().append("g")
+    .call(force.drag);
 
-    var ordinalLegend = d3.scale.ordinal()
-        .domain(["Queens", "Brooklyn", "The Bronx", "Manhattan","Staten Island"])
-        .range([ "#E4BB97", "#D6E3F8", "#9D5C63", "#94958B", "#584B53"]);
+node.append("circle")
+    .style("fill", function (d) {
+        return colorScale(d.cluster);
+    })
+    .attr("r", function(d){return d.radius})
+    .on("mouseover", function(d){
+        d3.select(this).style("opacity", 0.75);
+        updateDogInfo(d)})
+    .on("mouseout", function(d){
+        d3.select(this).style("opacity", 1);
+        updateDogInfo(d)});
 
-    var legendOrdinal = d3.legend.color()
-        .labelFormat(d3.format(".0f"))
-        .scale(ordinalLegend)
-        .shapePadding(5)
-        .shapeWidth(20)
-        .shapeHeight(20)
-        .labelOffset(12);
+svg.append("g")
+    .attr("class", "legendOrdinal")
+    .attr("transform", "translate(5,10)");
 
-    svg.select(".legendOrdinal")
-        .call(legendOrdinal);
+var ordinalLegend = d3.scale.ordinal()
+    .domain(["Queens", "Brooklyn", "The Bronx", "Manhattan","Staten Island"])
+    .range([ "#E4BB97", "#D6E3F8", "#9D5C63", "#94958B", "#584B53"]);
+
+var legendOrdinal = d3.legend.color()
+    .labelFormat(d3.format(".0f"))
+    .scale(ordinalLegend)
+    .shapePadding(5)
+    .shapeWidth(20)
+    .shapeHeight(20)
+    .labelOffset(12);
+
+svg.select(".legendOrdinal")
+    .call(legendOrdinal);
 
     function updateDogInfo(cir) {
         var info = "";
@@ -165,4 +165,4 @@ var width1 = 1000,
             });
         };
     }
-    });         
+});         
