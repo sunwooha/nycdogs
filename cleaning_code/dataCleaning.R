@@ -1,5 +1,5 @@
 # load in data
-dogs <- read_csv("dogNames.csv")
+dogs <- read_csv("/Applications/MAMP/htdocs/nycdogs/data/dogNames.csv")
 
 # filtering the unknowns
 dogs_part2 <- dogs %>%
