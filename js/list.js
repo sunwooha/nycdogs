@@ -9,9 +9,7 @@ d3.csv("data/top_10_popular_names_borough.csv", type, function(data) {
         });
     });
 
-    console.log(boroughs2);
-
-    var list = d3.select('#namevis').selectAll('ul')
+    var list = d3.select('#namelist').selectAll('ul')
         .data(boroughs2)
         .enter().append('ul')
         .text(function(d) {
@@ -25,5 +23,20 @@ d3.csv("data/top_10_popular_names_borough.csv", type, function(data) {
         .selectAll("li")
         .data(function(d) {return d.values;})
         .enter().append('li')
-        .text(function(d) { return d.AnimalName; });
+        .attr('class','tooltip')
+        .text(function(d) { return d.AnimalName; })
+        .append("span")
+        .attr('class','tooltiptext')
+        .text(function(d) {return (d.n + " dogs");})
 });
+/*var keywords = document.querySelector('#namelist');
+
+keywords.addEventListener('click', function(event){
+    var target = event.target;
+    var text = keywords.textContent;
+    console.log("This is target: " + target.textContent);
+    console.log("This is text: " + text);
+    //var regex = new RegExp('('+target.textContent+')', 'ig');
+    //text = text.replace(regex, '<span class="highlight">$1</span>');
+    //sentences.innerHTML = text;
+}, false);*/
