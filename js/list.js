@@ -12,6 +12,7 @@ d3.csv("data/top_10_popular_names_borough.csv", type, function(data) {
     var list = d3.select('#namelist').selectAll('ul')
         .data(boroughs2)
         .enter().append('ul')
+        .attr('id', 'boroughlist')
         .text(function(d) {
             if(d.key == "Bronx"){
                 return "The Bronx";
