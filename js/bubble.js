@@ -1,8 +1,8 @@
-var width1 = 900,
-    height1 = 700,
+var width1 = 1000,
+    height1 = 800,
     padding = 1.5, // separation between same-color nodes
     clusterPadding = 6, // separation between different-color nodes
-    maxRadius = 8;
+    maxRadius = 9;
 
 var colorScale = d3.scale.ordinal()
     .range(["#584B53", "#9D5C63", "#D6E3F8", "#94958B", "#E4BB97"]);

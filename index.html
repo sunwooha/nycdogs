@@ -27,6 +27,10 @@
     <link rel='stylesheet' href='css/bundle.css' />
 
     <style type="text/css">
+        small { 
+            font-size: smaller;
+        }
+
         #boroughlist{
             color: #8A716A;
         }
@@ -72,6 +76,11 @@
             margin-right: 20%;
         }
 
+        div.commentary{
+            margin-left: 30%;
+            margin-right: 30%;
+        }
+
         .changecolor{
             color: #8A716A;
         }
@@ -105,19 +114,6 @@
             border-radius: 2px;
         }
 
-        /* Creates a small triangle extender for the tooltip */
-        .d3-tip:after {
-            box-sizing: border-box;
-            display: inline;
-            font-size: 12px;
-            line-height: 1;
-            color: #1e1e1e;
-            content: "\25BC";
-            position: absolute;
-            text-align: center;
-        }
-
-        /* Style northward tooltips differently */
         .d3-tip.n:after {
             margin: -1px 0 0 0;
             top: 100%;
@@ -164,7 +160,7 @@
             visibility: visible;
             opacity: 1;
         }
-
+        
         @font-face {
             font-family: 'Canela Web';
             src: url('https://pudding.cool/assets/fonts/canela/Canela-Light-Web.woff2') format('woff2'),
@@ -262,16 +258,27 @@
             <div class= 'bubbleprose'>
                 <div class= 'bubbleintro'>
                     <h2 class='bubbleprose_hed tk-canela'><strong>Popularity of<span class="changecolor"> Breeds </span>in Each Borough</strong></h2> 
-                    <p>Count of unique dog breeds in Brooklyn, Manhattan, Queens, Staten Island, and the Bronx.
+                    <p>The count of unique dog breeds in Brooklyn, Manhattan, Queens, Staten Island, and the Bronx.
                         The larger the circle, the more instances of that breed in its respective borough.
-                        Hover over the circles to see the breed and their count. You can also try moving the bubbles!</p>
+                        Hover over the circles to see the breed and their count. If the chart is too big for your browser, please zoom out! <br></br>
+                        <em>Hold a single bubble/circle and try moving it around!</em>
+                    </p>
                 </div>
                 <div class='bubblediv' align = 'center'>
                     <div id="dog-info"></div>
                     <div id="bubblevis"></div>
                     <script src="js/bubble.js"></script>
                 </div>
-                <p>Text explaining a little bit about the bubble chart</p>
+                <div class= 'commentary' align = 'left'>
+                    <p>
+                        Its no suprise that Brooklyn, Manhattan, and Queens have a bigger bubble cluster when compared to the Bronx and Staten Island.
+                        Since these three are the most populated broughs in NYC, it makes sense that they would have more dogs and a more diverse collection of breeds! 
+                        <br></br>
+                        It is interesting to note that most popular breeds in the boroughs tend to be small to medium sized dogs like Yorkshire Terriers, Shih Tzus, and Chihuahuas.
+                        This is probably due limitation of space in the city. However, this is not always the case as big sized dogs like Labrador Retrievers and Pit Bulls
+                        are strongly represented in the boroughs as well. 
+                    </p>
+                </div>
                 <br></br>
             </div>               
         </div>
@@ -287,7 +294,21 @@
                 <div id="barvis", align = 'center'></div>
                  <script src="js/bar.js"></script>
                  <br></br>
-                 <p>Text explaining a little bit about the bar charts</p>
+                 <div class= 'commentary' align = 'left'>
+                    <p>
+                        Despite the difference in sample size for each borough, all the distributions follow the same trend!
+                        Well, except for Staten Island. Three out of four is pretty good right? 
+                        For the Bronx, Brooklyn, Manhattan, and Queens, ages two and three are battling for most popular age.
+                        After the peak from ages two and three, the count of the ages gradually decrease.
+                        <br></br>
+                        As for Staten Island, there is a peak at age three like the boroughs above followed by a decrease in the count of ages. 
+                        But, the trend takes a turn at age six and the count of the ages slightly increase with a second peak at age seven. Unlike the other 
+                        boroughs, Staten Island has two noticable peaks. This means that there are about the same number of two and three year old dogs as there 
+                        are of seven year old dogs.
+                        <br></br>
+                        It is also fascinating that there are no observations of dogs over 18 years old in all of the boroughs. 
+                    </p>
+                 </div>
                  <br></br>
             </div>
         </div>
@@ -296,7 +317,7 @@
             <div class='nameprose'>
                 <div class='nameproseintro'>
                     <h2 class='nameprose_hed tk-canela'><strong>Top 10 <span class="changecolor">Names</span> for Dogs in Each Borough</strong></h2>
-                    <p>The title speaks for itself.</p>
+                    <p>Did your dog's name make it to the top ten of any of the boroughs?</p>
                 </div>
                 <div class="namediv">
                     <div id='namelist'>
@@ -304,7 +325,27 @@
                     </div>
                 </div>
                 <br></br>
-                <p>Text explaining a little bit about the names.</p>
+                <div class= 'commentary' align = 'left'>
+                    <p>
+                        When we compare the top ten names for the boroughs, there is a lot of overlapping.
+                        Noteably, Bella is considered the number one name for three of the five boroughs followed by Max in second. 
+                        Out of the 50 names listed above, there are only 17 unique names! Bella, Max, Coco, and Lola are in the top ten 
+                        for all the boroughs with 5 appearances each while the names that appeared only once are Prince, Oreo, Oliver, Teddy, and Molly. 
+                        <br></br>
+                        Perhaps dog owners should try to be a little more creative when it comes to naming...
+                    </p>
+                </div>
+            </div>
+        </div>
+        <br></br>
+        <br></br>
+        <div class='methodology'>
+            <div class= 'commentary' align = 'left'>
+                <p>
+                    <small><strong>Methodology:</strong> Data via <a href="https://tinyletter.com/data-is-plural"> Data Is Plural</a>. 
+                    All the visualizations above were created using <a href="https://d3js.org/">D3</a>. Special thank you to 
+                    <a href="https://pudding.cool">The Pudding</a> for the inspiration and starter template.</small>
+                </p>
             </div>
         </div>
     </main>        
