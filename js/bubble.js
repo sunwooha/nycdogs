@@ -1,8 +1,8 @@
-var width1 = 1000,
-    height1 = 800,
+var width1 = 900,
+    height1 = 700,
     padding = 1.5, // separation between same-color nodes
     clusterPadding = 6, // separation between different-color nodes
-    maxRadius = 9;
+    maxRadius = 8;
 
 var colorScale = d3.scale.ordinal()
     .range(["#584B53", "#9D5C63", "#D6E3F8", "#94958B", "#E4BB97"]);
@@ -68,8 +68,8 @@ svg.append("g")
     .attr("transform", "translate(5,10)");
 
 var ordinalLegend = d3.scale.ordinal()
-    .domain(["Queens", "Brooklyn", "The Bronx", "Manhattan","Staten Island"])
-    .range([ "#E4BB97", "#D6E3F8", "#9D5C63", "#94958B", "#584B53"]);
+    .domain(["The Bronx", "Brooklyn", "Manhattan","Queens","Staten Island"])
+    .range(["#584B53", "#9D5C63", "#D6E3F8", "#94958B", "#E4BB97"]);
 
 var legendOrdinal = d3.legend.color()
     .labelFormat(d3.format(".0f"))
