@@ -4,7 +4,6 @@ var margin = {top: 45, right: 100, bottom: 20, left: 20},
 
 var color = d3.scale.threshold()
     .range(['#fffafa','#f1eae9','#e5dad8','#d7cbc8','#cabab7','#bdaba7','#b09d98','#a38d88','#978079','#8a716a'])
-    //.range(['#fffafa','#f5e7e8','#ead5d6','#e0c4c5','#d5b1b4','#caa0a3','#bf8f92','#b47e82','#a96d72','#9d5c63'])
     .domain([0, 400, 800, 1200, 1600, 2000, 2400, 2800, 3200, 4000]);
 
 var x = d3.scale.ordinal()
