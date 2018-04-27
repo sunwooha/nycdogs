@@ -49,8 +49,8 @@ var svg = d3.select("#bubblevis").append("svg")
 var node = svg.selectAll("circle")
     .data(nodes)
     .enter().append("g")
-    .call(force.drag);
-
+    .call(force.drag)
+    
 node.append("circle")
     .style("fill", function (d) {
         return colorScale(d.cluster);
@@ -82,6 +82,17 @@ var legendOrdinal = d3.legend.color()
 svg.select(".legendOrdinal")
     .call(legendOrdinal);
 
+    function getDogBreed(cir){
+        var breed = cir.text;
+        breed = breed.replace(/,/g, '');
+        breed = breed.replace(/\s/g, "+");
+        var link = 'http://www.google.com/images?q=' + breed;
+        console.log(link);
+        window.open(link, '_blank');
+        
+        return link;
+    }
+
     function updateDogInfo(cir) {
         var info = "";
         if (cir) {
@@ -94,19 +105,19 @@ svg.select(".legendOrdinal")
     };
 
     function create_nodes(data,node_counter) {
-    var i = cs.indexOf(data[node_counter].group),
-        r = Math.sqrt((i + 1) / m * -Math.log(Math.random())) * maxRadius,
-        d = {
-            borough: data[node_counter].group,
-            text: data[node_counter].text,
-            size: data[node_counter].size, 
-            cluster: i,
-            radius: Math.log2(data[node_counter].size)*(maxRadius/(5)),
-            x: Math.cos(i / m * 2 * Math.PI) * 100 + width1 / 2 + Math.random(),
-            y: Math.sin(i / m * 2 * Math.PI) * 100 + height1 / 2 + Math.random()
-        };
-    if (!clusters[i] || (r > clusters[i].radius)) clusters[i] = d;
-    return d;
+        var i = cs.indexOf(data[node_counter].group),
+            r = Math.sqrt((i + 1) / m * -Math.log(Math.random())) * maxRadius,
+            d = {
+                borough: data[node_counter].group,
+                text: data[node_counter].text,
+                size: data[node_counter].size, 
+                cluster: i,
+                radius: Math.log2(data[node_counter].size)*(maxRadius/(5)),
+                x: Math.cos(i / m * 2 * Math.PI) * 100 + width1 / 2 + Math.random(),
+                y: Math.sin(i / m * 2 * Math.PI) * 100 + height1 / 2 + Math.random()
+            };
+        if (!clusters[i] || (r > clusters[i].radius)) clusters[i] = d;
+        return d;
     };
 
     function tick(e) {
@@ -115,8 +126,7 @@ svg.select(".legendOrdinal")
         .attr("transform", function (d) {
             var k = "translate(" + d.x + "," + d.y + ")";
             return k;
-        })
-
+        });
     }
 
     // Move d to be adjacent to the cluster node.
