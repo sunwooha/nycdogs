@@ -90,7 +90,7 @@ svg.select(".legendOrdinal")
         var breed = cir.text;
         breed = breed.replace(/,/g, '');
         breed = breed.replace(/\s/g, "+");
-        var link = 'http://www.google.com/images?q=' + breed;
+        var link = 'http://www.google.com/images?q=' + breed + '+dog';
         return link;
     }
 
