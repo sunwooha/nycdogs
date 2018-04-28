@@ -50,18 +50,22 @@ var node = svg.selectAll("circle")
     .data(nodes)
     .enter().append("g")
     .call(force.drag)
-    
-node.append("circle")
-    .style("fill", function (d) {
-        return colorScale(d.cluster);
-    })
-    .attr("r", function(d){return d.radius})
-    .on("mouseover", function(d){
-        d3.select(this).style("opacity", 0.75);
-        updateDogInfo(d)})
-    .on("mouseout", function(d){
-        d3.select(this).style("opacity", 1);
-        updateDogInfo(d)});
+
+node.append("a")
+    .attr("xlink:href", function(d){return getDogBreed(d)})
+    .attr("target", "_blank")
+    .append("circle")
+        .style("fill", function (d) {
+            return colorScale(d.cluster);
+        })
+        .attr("r", function(d){return d.radius})
+        .on("click", function(d){ getDogBreed(d)})
+        .on("mouseover", function(d){
+            d3.select(this).style("opacity", 0.75);
+            updateDogInfo(d)})
+        .on("mouseout", function(d){
+            d3.select(this).style("opacity", 1);
+            updateDogInfo(d)});
 
 svg.append("g")
     .attr("class", "legendOrdinal")
@@ -87,9 +91,6 @@ svg.select(".legendOrdinal")
         breed = breed.replace(/,/g, '');
         breed = breed.replace(/\s/g, "+");
         var link = 'http://www.google.com/images?q=' + breed;
-        console.log(link);
-        window.open(link, '_blank');
-        
         return link;
     }
 
