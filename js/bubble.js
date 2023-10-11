@@ -1,179 +1,148 @@
-var width1 = 1000,
-    height1 = 800,
-    padding = 1.5, // separation between same-color nodes
-    clusterPadding = 6, // separation between different-color nodes
-    maxRadius = 9;
+// Define your dimensions
+const width = 1000;
+const height = 800;
+const padding = 1.5; // separation between same-color nodes
+const maxRadius = 8;
 
-var colorScale = d3.scale.ordinal()
-    .range(["#584B53", "#9D5C63", "#D6E3F8", "#94958B", "#E4BB97"]);
+const colorScale = d3.scaleOrdinal()
+  .range(["#584B53", "#9D5C63", "#D6E3F8", "#94958B", "#E4BB97"]);
 
-d3.text("data/breeds_borough_count.csv", function(error, text) {
-    if (error) throw error;
-    var colNames = "group,text,size\n" + text;
-    var data = d3.csv.parse(colNames);
+d3.text("data/breeds_borough_count.csv").then(function (text) {
+  const colNames = "group,text,size\n" + text;
+  const data = d3.csvParse(colNames);
 
-data.forEach(function(d) {
+  data.forEach(function (d) {
     d.size = +d.size;
-});
+  });
 
-//unique cluster/group id's
-var cs = [];
-data.forEach(function(d){
-    if(!cs.includes(d.group)) {
-        cs.push(d.group);
+  const m = new Map();
+  data.forEach(function (d) {
+    if (!m.has(d.group)) {
+      m.set(d.group, { cluster: m.size });
     }
-});
+  });
 
-var n = data.length, // total number of nodes
-    m = cs.length; // number of distinct clusters
+  // Calculate the total width and height needed to center the visualization
+  const totalWidth = maxRadius * 2 + padding;
+  const totalHeight = maxRadius * 2 + padding;
 
-//create clusters and nodes
-var clusters = new Array(m);
-var nodes = [];
-for (var i = 0; i<n; i++){
-    nodes.push(create_nodes(data,i));
-}
+  const nodes = data.map(function (d) {
+    return {
+      borough: d.group,
+      text: d.text,
+      size: d.size,
+      radius: Math.log2(d.size) * (maxRadius / 5),
+      cluster: m.get(d.group).cluster,
+      x: (width - totalWidth) / 2 + Math.random() * totalWidth, // Center X
+      y: (height - totalHeight) / 2 + Math.random() * totalHeight // Center Y
+    };
+  });
 
-var force = d3.layout.force()
-    .nodes(nodes)
-    .size([width1, height1])
-    .gravity(.02)
-    .charge(0)
-    .on("tick", tick)
-    .start();
+  const simulation = d3.forceSimulation(nodes)
+    .force("center", centerForce(width, height))
+    .force("collide", d3.forceCollide().radius(function (d) {
+      return d.radius + padding;
+    }).iterations(1))
+    .on("tick", tick);
 
-var svg = d3.select("#bubblevis").append("svg")
-    .attr("width", width1)
-    .attr("height", height1)
+  const svg = d3.select("#bubblevis").append("svg")
+    .attr("width", width)
+    .attr("height", height);
 
-var node = svg.selectAll("circle")
+  const node = svg.selectAll("circle")
     .data(nodes)
     .enter().append("g")
-    .call(force.drag)
+    .call(d3.drag()
+      .on("start", dragstarted)
+      .on("drag", dragged)
+      .on("end", dragended));
 
-node.append("a")
-    .attr("xlink:href", function(d){return getDogBreed(d)})
+  node.append("a")
+    .attr("xlink:href", function (d) {
+      return getDogBreed(d);
+    })
     .attr("target", "_blank")
     .append("circle")
-        .style("fill", function (d) {
-            return colorScale(d.cluster);
-        })
-        .attr("r", function(d){return d.radius})
-        .on("click", function(d){ getDogBreed(d)})
-        .on("mouseover", function(d){
-            d3.select(this).style("opacity", 0.75);
-            updateDogInfo(d)})
-        .on("mouseout", function(d){
-            d3.select(this).style("opacity", 1);
-            updateDogInfo(d)});
+    .style("fill", function (d) {
+      return colorScale(d.cluster);
+    })
+    .attr("r", function (d) {
+      return d.radius;
+    })
+    .on("click", function (e, d) {
+      getDogBreed(d);
+    })
+    .on("mouseover", function (e, d) {
+      d3.select(this).style("opacity", 0.75);
+      updateDogInfo(d);
+    })
+    .on("mouseout", function (e, d) {
+      d3.select(this).style("opacity", 1);
+      updateDogInfo(d);
+    });
 
-svg.append("g")
-    .attr("class", "legendOrdinal")
-    .attr("transform", "translate(5,10)");
+    var ordinalLegend = d3.scaleOrdinal()
+        .domain(["The Bronx", "Brooklyn", "Manhattan","Queens","Staten Island"])
+        .range(["#584B53", "#9D5C63", "#D6E3F8", "#94958B", "#E4BB97"]);
 
-var ordinalLegend = d3.scale.ordinal()
-    .domain(["The Bronx", "Brooklyn", "Manhattan","Queens","Staten Island"])
-    .range(["#584B53", "#9D5C63", "#D6E3F8", "#94958B", "#E4BB97"]);
+    var legendOrdinal = d3.legendColor()
+        .labelFormat(d3.format(".0f"))
+        .scale(ordinalLegend)
+        .shapePadding(5)
+        .shapeWidth(20)
+        .shapeHeight(20)
+        .labelOffset(12);
 
-var legendOrdinal = d3.legend.color()
-    .labelFormat(d3.format(".0f"))
-    .scale(ordinalLegend)
-    .shapePadding(5)
-    .shapeWidth(20)
-    .shapeHeight(20)
-    .labelOffset(12);
+    svg.append("g")
+        .attr("class", "legendOrdinal")
+        .attr("transform", "translate(5,10)")
+        .call(legendOrdinal);
 
-svg.select(".legendOrdinal")
-    .call(legendOrdinal);
+  function getDogBreed(cir) {
+    const breed = cir.text.replace(/,/g, '').replace(/\s/g, "+");
+    const link = 'http://www.google.com/images?q=' + breed + '+dog';
+    return link;
+  }
 
-    function getDogBreed(cir){
-        var breed = cir.text;
-        breed = breed.replace(/,/g, '');
-        breed = breed.replace(/\s/g, "+");
-        var link = 'http://www.google.com/images?q=' + breed + '+dog';
-        return link;
-    }
+  function updateDogInfo(cir) {
+    let info = cir ? `${cir.text}: ${cir.size}` : "";
+    d3.select("#dog-info").html(info);
+  }
 
-    function updateDogInfo(cir) {
-        var info = "";
-        if (cir) {
-            info = [cir.text, cir.size].join(": ");
+  function tick() {
+    node.attr("transform", function (d) {
+      return `translate(${d.x},${d.y})`;
+    });
+  }
+
+  function dragstarted(event, d) {
+    if (!event.active) simulation.alphaTarget(0.3).restart();
+    d.fx = d.x;
+    d.fy = d.y;
+  }
+
+  function dragged(event, d) {
+    d.fx = event.x;
+    d.fy = event.y;
+  }
+
+  function dragended(event, d) {
+    if (!event.active) simulation.alphaTarget(0);
+    d.fx = null;
+    dfy = null;
+  }
+
+  function centerForce(width, height) {
+    return function (alpha) {
+      for (const cluster of Array.from(m.values())) {
+        const nodesInCluster = nodes.filter((d) => d.cluster === cluster.cluster);
+        const centerX = d3.mean(nodesInCluster, (d) => d.x);
+        const centerY = d3.mean(nodesInCluster, (d) => d.y);
+        for (const node of nodesInCluster) {
+          node.x += (centerX - node.x) * alpha;
+          node.y += (centerY - node.y) * alpha;
         }
-        else{
-            info = "";
-        }
-        d3.select("#dog-info").html(info);
+      }
     };
-
-    function create_nodes(data,node_counter) {
-        var i = cs.indexOf(data[node_counter].group),
-            r = Math.sqrt((i + 1) / m * -Math.log(Math.random())) * maxRadius,
-            d = {
-                borough: data[node_counter].group,
-                text: data[node_counter].text,
-                size: data[node_counter].size, 
-                cluster: i,
-                radius: Math.log2(data[node_counter].size)*(maxRadius/(5)),
-                x: Math.cos(i / m * 2 * Math.PI) * 100 + width1 / 2 + Math.random(),
-                y: Math.sin(i / m * 2 * Math.PI) * 100 + height1 / 2 + Math.random()
-            };
-        if (!clusters[i] || (r > clusters[i].radius)) clusters[i] = d;
-        return d;
-    };
-
-    function tick(e) {
-        node.each(cluster(10 * e.alpha * e.alpha))
-            .each(collide(.5))
-        .attr("transform", function (d) {
-            var k = "translate(" + d.x + "," + d.y + ")";
-            return k;
-        });
-    }
-
-    // Move d to be adjacent to the cluster node.
-    function cluster(alpha) {
-        return function (d) {
-            var cluster = clusters[d.cluster];
-            if (cluster === d) return;
-            var x = d.x - cluster.x,
-                y = d.y - cluster.y,
-                l = Math.sqrt(x * x + y * y),
-                r = d.radius + cluster.radius;
-            if (l != r) {
-                l = (l - r) / l * alpha;
-                d.x -= x *= l;
-                d.y -= y *= l;
-                cluster.x += x;
-                cluster.y += y;
-            }
-        };
-    }
-
-    // Resolves collisions between d and all other circles.
-    function collide(alpha) {
-        var quadtree = d3.geom.quadtree(nodes);
-        return function (d) {
-            var r = d.radius + maxRadius + Math.max(padding, clusterPadding),
-                nx1 = d.x - r,
-                nx2 = d.x + r,
-                ny1 = d.y - r,
-                ny2 = d.y + r;
-            quadtree.visit(function (quad, x1, y1, x2, y2) {
-                if (quad.point && (quad.point !== d)) {
-                    var x = d.x - quad.point.x,
-                        y = d.y - quad.point.y,
-                        l = Math.sqrt(x * x + y * y),
-                        r = d.radius + quad.point.radius + (d.cluster === quad.point.cluster ? padding : clusterPadding);
-                    if (l < r) {
-                        l = (l - r) / l * alpha;
-                        d.x -= x *= l;
-                        d.y -= y *= l;
-                        quad.point.x += x;
-                        quad.point.y += y;
-                    }
-                }
-                return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
-            });
-        };
-    }
-});         
+  }
+});

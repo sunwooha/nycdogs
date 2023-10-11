@@ -4,9 +4,10 @@
 <title>Exploring Dogs and NYC Boroughs in Three Charts</title>
 <html lang="en">
 <head>
-    <script src="https://d3js.org/d3.v3.min.js"></script>
-    <script src = "https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.1.0/d3-legend.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.13.0/d3-legend.js"></script>
     <script src="https://labratrevenge.com/d3-tip/javascripts/d3.tip.min.js"></script>
+    <script  src="d3-tip/index.js"></script>
 
     <title>Exploring Dogs and NYC Boroughs in Three Charts</title>
     <link rel="shortcut icon" href="images/dog.ico"/> 
@@ -39,9 +40,14 @@
             background-color: #F9F5ED;
         }
         
-        #barvis {
+        .barvis, .x.axis {
             font-family: 'Canela Web';
             font-size: 15px;
+        }
+
+        div.barvis{
+            max-width: 1500px;
+            margin:0 auto;
         }
 
         #dog-info {
@@ -292,7 +298,7 @@
                     <p>Distribution of the ages of dogs (as of 2015) in NYC from 1 year old to 18 years old! Hover over the bars for more info!</p>
                 </div> 
                 <br></br>
-                <div id="barvis", align = 'center'></div>
+                <div class="barvis", align = 'center'></div>
                  <script src="js/bar.js"></script>
                  <br></br>
                  <div class= 'commentary' align = 'left'>
